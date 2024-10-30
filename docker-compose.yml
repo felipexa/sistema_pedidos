@@ -1,0 +1,20 @@
+services:
+  sistema-pedidos:
+    image: sistema-pedidos
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: sistema-pedidos
+    restart: unless-stopped
+    ports:
+      - 9090:80
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - infra-postgres
+      - sistema-pedidos
+networks:
+  infra-postgres:
+    external: true
+  sistema-pedidos:
+    name: sistema-pedidos-network
